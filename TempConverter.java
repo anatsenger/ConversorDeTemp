@@ -1,7 +1,7 @@
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-public class ConversorTemp {
+public class TempConverter {
     public static void main(String[] args) {
         String answer = "s";
 
