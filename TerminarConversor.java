@@ -1,50 +1,46 @@
 import java.util.Scanner;
 
-public class teminarConversor {
+public class TerminarConversor {
 
-
-    public static String terminarConversor(String resposta) {
+    public static String terminarConversor(String answer) {
         Scanner input = new Scanner(System.in);
         System.out.println("Quer realizar mais alguma conversão? s/n");
-        resposta = input.next();
+        answer = input.next();
 
-        switch (resposta) {
-            case "s" -> {
+        switch (answer) {
+            case "s" ->
                 System.out.println("|----------Reiniciando Conversor de Temperatura---------|");
 
-            }
-            case "n" -> {
+            case "n" ->
                 System.out.println("|----------Encerrando Conversor de Temperatura---------|");
-            }
+
             default -> {
                 System.out.println("digite apenas s para sim ou n para não");
-                terminarConversor(resposta);
-            }
+                terminarConversor(answer);}
+
         }
-        return resposta;
-//        if (resposta == "n") {
+        return answer;
+//        if (answer == "n") {
 //            System.out.println("|----------Encerrando Conversor de Temperatura---------|");
 //            input.close();
 //            return true;
-//        } else if (resposta == "s") {
+//        } else if (answer == "s") {
 //            System.out.println("|----------Reiniciando Conversor de Temperatura---------|");
 //            return false;
 //        } else {
 //            do {
 //                System.out.println("digite apenas s ou n");
 //                System.out.println("Quer realizar mais alguma conversão? s/n");
-//                resposta = input.next();
-//                if (resposta == "n") {
+//                answer = input.next();
+//                if (answer == "n") {
 //                    return true;
-//                } else if (resposta == "s") {
+//                } else if (answer == "s") {
 //                    return false;
 //                } else {
 //                    return false;
 //                }
-//            } while (!resposta.equals("s") || !resposta.equals("n"));
+//            } while (!answer.equals("s") || !answer.equals("n"));
 //        }
 
     }
-
-
 }

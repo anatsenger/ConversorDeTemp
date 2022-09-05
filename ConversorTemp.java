@@ -1,27 +1,27 @@
 import java.util.InputMismatchException;
 import java.util.Scanner;
-import java.util.Arrays;
 
 public class ConversorTemp {
     public static void main(String[] args) {
-        String resposta = "s";
+        String answer = "s";
 
-        while (resposta.equals("s")) {
+        while (answer.equals("s")) {
             initialize();
 
 //pede a unidade de entrada da temp;
-            String tipo = "inicial";
-            OpcoesUnidade entrada = codeOption(tipo);
-            if (entrada == OpcoesUnidade.SAIR) {
+            String type = "inicial";
+            UnityOptions entrada = codeOption(type);
+            if (entrada == UnityOptions.SAIR) {
                 System.out.println("|----------Encerrando Conversor de Temperatura---------|");
                 break;
             }
-            if (entrada == OpcoesUnidade.ERRO){
-                while (entrada == OpcoesUnidade.ERRO){
-                    entrada = codeOption(tipo);
+// não entendi pq o verifica não funciona;
+            if (entrada == UnityOptions.ERRO){
+                while (entrada == UnityOptions.ERRO){
+                    entrada = codeOption(type);
                 }
             }
-//            verifica(entrada, tipo);
+//            verifica(entrada, type);
 
 //pede a quantidade de temperaturas q quer converter e as temperaturas;
             double[] temp = new double[QuantTemperaturas()];
@@ -30,95 +30,108 @@ public class ConversorTemp {
 
 
 //pede a unidade para qual quer converter a temp;
-        tipo = "final";
-        OpcoesUnidade saida = codeOption(tipo);
-//        verifica(saida, tipo);
-        if (saida == OpcoesUnidade.SAIR) {
+        type = "final";
+        UnityOptions saida = codeOption(type);
+        if (saida == UnityOptions.SAIR) {
             System.out.println("|----------Encerrando Conversor de Temperatura---------|");
             break;
         }
-            if (saida == OpcoesUnidade.ERRO){
-                while (saida == OpcoesUnidade.ERRO){
-                    saida = codeOption(tipo);
+
+//não entendi pq o verifica não funciona;
+            if (saida == UnityOptions.ERRO){
+                while (saida == UnityOptions.ERRO){
+                    saida = codeOption(type);
                 }
             }
+//        verifica(saida, type);
 
 
 //converte as temp passadas e faz a média das temp convertidas;
-        Converte.converte(temp, entrada, saida);
+        Convert.convert(temp, entrada, saida);
 
 //termina ou reinicia o conversor;
-        resposta = teminarConversor.terminarConversor(resposta);
+        answer = TerminarConversor.terminarConversor(answer);
     }
 
 }
 
-        private static double[] getTemps(OpcoesUnidade entrada, double[] temp){
+        private static double[] getTemps(UnityOptions entrada, double[] temp){
             try{
             for (int i = 0; i < temp.length; i++) {
                 int numero = i;
                 Scanner input = new Scanner(System.in);
-                System.out.println("Temperatura " + (++numero) + " em " + entrada + " que deseja converter: ");
-                    temp[i] = input.nextInt();
+                System.out.println("Temperatura " + (++numero) + " em " + entrada + " que quer converter: ");
+                    temp[i] = input.nextDouble();
                 }
             } catch (InputMismatchException d){
-                System.out.println("Temperatura invalida, tente novamente!");
-                getTemps(entrada, temp);}
+                System.err.println("Temperatura invalida, tente novamente!" +
+                        "\nPS: caso tenha tentando algum número com virgula, troque a virgula por ponto;");
+                getTemps(entrada, temp);
+            }
 
             return temp;
         }
 
         private static int QuantTemperaturas () {
             Scanner input = new Scanner(System.in);
-            System.out.println("Quantas temperaturas deseja converter?");
+            int quantTemps;
+            System.out.println("Quantas temperaturas quer converter?");
             try {
-                return input.nextInt();
+                quantTemps = input.nextInt();
+                if(quantTemps <= 10) {
+                    return quantTemps;
+                } else {
+                    System.err.println("ATENÇÃO: Quantidade maxima de temperaturas = 10.");
+                    return QuantTemperaturas();
+                }
             }catch (InputMismatchException b){
-                System.out.println("Quantidade invalida, tente novamente!");
+                System.err.println("Quantidade invalida, escolha um número inteiro!");
                 return QuantTemperaturas();
             }
         }
 
-        public static OpcoesUnidade codeOption (String tipo) {
+        public static UnityOptions codeOption (String tipo) {
             Scanner input = new Scanner(System.in);
             System.out.println("Digite a unidade "+ tipo +"  da sua temperatura: ");
             try {
             int x = input.nextInt();
                 if (x == 1) {
-                    return OpcoesUnidade.CELSIUS;
+                    return UnityOptions.CELSIUS;
                 } else if (x == 2) {
-                    return OpcoesUnidade.FAHRENHEIT;
+                    return UnityOptions.FAHRENHEIT;
                 } else if (x == 3) {
-                    return OpcoesUnidade.KELVIN;
+                    return UnityOptions.KELVIN;
                 } else if (x == 0) {
-                    return OpcoesUnidade.SAIR;
+                    return UnityOptions.SAIR;
                 } else {
-                    System.out.println("Opção inválida, tente novamente!");
-                    return OpcoesUnidade.ERRO;
+                    System.err.println("Opção invalida, tente uma opção apresentada no no menu!");
+                    return UnityOptions.ERRO;
                 }
             } catch (InputMismatchException a) {
-                System.out.println("Opção invalida, tente uma opção apresentada no no menu!");
+                System.err.println("Opção invalida, tente uma opção apresentada no no menu!");
                 return codeOption(tipo);
             }
         }
 
 
-//        public static void verifica(OpcoesUnidade escolha, String tipo) {
-//             if (escolha == OpcoesUnidade.ERRO){
-//                while (escolha == OpcoesUnidade.ERRO){
+//        public static UnityOptions verifica(UnityOptions escolha, String tipo) {
+//
+//                while (escolha == UnityOptions.ERRO){
 //                    escolha = codeOption(tipo);
 //                }
-//            }
+//                return escolha;
 //        }
 
         private static void initialize () {
             System.out.println("|-------------------------------------------------------|");
             System.out.println("|---------------Conversor de temperaturas---------------|");
             System.out.println("|---------------------Menu de opções:-------------------|");
-            System.out.println("|Opção 1 = Celsius--------------------------------------|");
-            System.out.println("|Opção 2 = Fahrenheit-----------------------------------|");
-            System.out.println("|Opção 3 = Kelvin---------------------------------------|");
-            System.out.println("|Opção 0 = Sair do Conversor de Temperatura-------------|");
+            System.out.println("|Opção 1 = Celsius                                      |");
+            System.out.println("|Opção 2 = Fahrenheit                                   |");
+            System.out.println("|Opção 3 = Kelvin                                       |");
+            System.out.println("|Opção 0 = Sair do Conversor de Temperatura             |");
+            System.out.println("|                                                       |");
+            System.out.println("|ps: quantidade máxima de temperaturas = 10             |");
             System.out.println("|-------------------------------------------------------|");
         }
 
