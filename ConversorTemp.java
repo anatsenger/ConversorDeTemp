@@ -8,59 +8,58 @@ public class ConversorTemp {
         while (answer.equals("s")) {
             initialize();
 
-//pede a unidade de entrada da temp;
+//pede a unidade de input da temp;
             String type = "inicial";
-            UnityOptions entrada = codeOption(type);
-            if (entrada == UnityOptions.SAIR) {
+            UnityOptions input = codeOption(type);
+            if (input == UnityOptions.SAIR) {
                 System.out.println("|----------Encerrando Conversor de Temperatura---------|");
                 break;
             }
 // não entendi pq o verifica não funciona;
-            if (entrada == UnityOptions.ERRO){
-                while (entrada == UnityOptions.ERRO){
-                    entrada = codeOption(type);
+            if (input == UnityOptions.ERRO){
+                while (input == UnityOptions.ERRO){
+                    input = codeOption(type);
                 }
             }
-//            verifica(entrada, type);
+//            verifica(input, type);
 
 //pede a quantidade de temperaturas q quer converter e as temperaturas;
             double[] temp = new double[QuantTemperaturas()];
-            getTemps(entrada, temp);
+            getTemps(input, temp);
 
 
 
 //pede a unidade para qual quer converter a temp;
         type = "final";
-        UnityOptions saida = codeOption(type);
-        if (saida == UnityOptions.SAIR) {
+        UnityOptions output = codeOption(type);
+        if (output == UnityOptions.SAIR) {
             System.out.println("|----------Encerrando Conversor de Temperatura---------|");
             break;
         }
 
 //não entendi pq o verifica não funciona;
-            if (saida == UnityOptions.ERRO){
-                while (saida == UnityOptions.ERRO){
-                    saida = codeOption(type);
+            if (output == UnityOptions.ERRO){
+                while (output == UnityOptions.ERRO){
+                    output = codeOption(type);
                 }
             }
-//        verifica(saida, type);
+//        verifica(output, type);
 
 
 //converte as temp passadas e faz a média das temp convertidas;
-        Convert.convert(temp, entrada, saida);
+        Convert.convert(temp, input, output);
 
 //termina ou reinicia o conversor;
-        answer = TerminarConversor.terminarConversor(answer);
+        answer = BreakWhile.terminarConversor(answer);
     }
 
 }
-
         private static double[] getTemps(UnityOptions entrada, double[] temp){
             try{
             for (int i = 0; i < temp.length; i++) {
-                int numero = i;
+                int number = i;
                 Scanner input = new Scanner(System.in);
-                System.out.println("Temperatura " + (++numero) + " em " + entrada + " que quer converter: ");
+                System.out.println("Temperatura " + (++number) + " em " + entrada + " que quer converter: ");
                     temp[i] = input.nextDouble();
                 }
             } catch (InputMismatchException d){
@@ -112,7 +111,6 @@ public class ConversorTemp {
                 return codeOption(tipo);
             }
         }
-
 
 //        public static UnityOptions verifica(UnityOptions escolha, String tipo) {
 //

@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class TerminarConversor {
+public class BreakWhile {
 
     public static String terminarConversor(String answer) {
         Scanner input = new Scanner(System.in);
