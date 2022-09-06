@@ -87,11 +87,14 @@ public class TempConverter {
         System.out.println("Quantas temperaturas quer converter?");
         try {
             quantTemps = input.nextInt();
-            if (quantTemps <= 10) {
-                return quantTemps;
-            } else {
-                System.err.println("ATENÇÃO: Quantidade maxima de temperaturas = 10.");
+            if (quantTemps == 0){
+                System.err.println("ATENÇÃO: Quantidade não pode ser zero, tente novamente!");
                 return QuantTemperaturas();
+            } else if (quantTemps >= 10) {
+                System.err.println("ATENÇÃO: 10 é a quantidade máxima de temperaturas permitidas");
+                return QuantTemperaturas();
+            } else {
+                return quantTemps;
             }
         } catch (InputMismatchException | NegativeArraySizeException e) {
             System.err.println("Quantidade invalida, escolha um número inteiro!");
