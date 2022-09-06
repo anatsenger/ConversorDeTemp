@@ -91,7 +91,7 @@ public class TempConverter {
                 System.err.println("ATENÇÃO: Quantidade não pode ser zero, tente novamente!");
                 return QuantTemperaturas();
             } else if (quantTemps >= 10) {
-                System.err.println("ATENÇÃO: 10 é a quantidade máxima de temperaturas permitidas");
+                System.err.println("ATENÇÃO: 10 é a quantidade máxima de temperaturas permitidas, tente novamente!");
                 return QuantTemperaturas();
             } else {
                 return quantTemps;
