@@ -25,8 +25,17 @@ public class TempConverter {
             input = verifica(input,type);
 
 //pede a quantidade de temperaturas q quer converter e as temperaturas;
-            double[] temp = new double[QuantTemperaturas()];
-            getTemps(input, temp);
+
+            double[] temp;
+            try {
+                temp = new double[QuantTemperaturas()];
+                getTemps(input, temp);
+            }catch (NegativeArraySizeException f){
+                System.err.println("Quantidades negativas são inválidas, tente novamente!");
+                temp = new double[QuantTemperaturas()];
+                getTemps(input, temp);
+            }
+
 
 
 //pede a unidade para qual quer converter a temp;
@@ -84,7 +93,7 @@ public class TempConverter {
                 System.err.println("ATENÇÃO: Quantidade maxima de temperaturas = 10.");
                 return QuantTemperaturas();
             }
-        } catch (InputMismatchException b) {
+        } catch (InputMismatchException | NegativeArraySizeException e) {
             System.err.println("Quantidade invalida, escolha um número inteiro!");
             return QuantTemperaturas();
         }
